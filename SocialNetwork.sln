@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.DbMigrations"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Web", "SocialNetwork.Web\SocialNetwork.Web.csproj", "{79DB763A-924B-4149-BD54-C1B1C44D32A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.OAuth", "SocialNetwork.OAuth\SocialNetwork.OAuth.csproj", "{D4000881-8605-418E-825F-2538B63629C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{79DB763A-924B-4149-BD54-C1B1C44D32A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79DB763A-924B-4149-BD54-C1B1C44D32A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79DB763A-924B-4149-BD54-C1B1C44D32A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4000881-8605-418E-825F-2538B63629C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4000881-8605-418E-825F-2538B63629C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4000881-8605-418E-825F-2538B63629C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4000881-8605-418E-825F-2538B63629C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

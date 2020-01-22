@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
+using IdentityServer4.Test;
 
 namespace SocialNetwork.OAuth.Configuration
 {
@@ -27,8 +28,23 @@ namespace SocialNetwork.OAuth.Configuration
                 {
                     ClientId = "socialnetwork",
                     ClientSecrets = new [] { new Secret("secret".Sha256()) },
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    AllowedScopes = new []{"socialnetwork"}
                 }
+
+            };
+        }
+
+        public static IEnumerable<TestUser> Users()
+        {
+            return new[]
+            {
+                new TestUser()
+                {
+                    SubjectId = "1",
+                    Username = "dortiz",
+                    Password = "pass123"
+                },
             };
         }
     }

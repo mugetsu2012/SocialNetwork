@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
@@ -16,7 +17,12 @@ namespace SocialNetwork.OAuth.Configuration
         {
             return new[]
             {
-                new ApiResource("socialnetwork", "Social Network")
+                new ApiResource("socialnetwork", "Social Network", new List<string>()
+                {
+                    ClaimTypes.Role,
+                    "cuenta"
+                }),
+                new ApiResource("coffeshop", "The Great Coffe Shop")
             };
         }
 
@@ -29,8 +35,19 @@ namespace SocialNetwork.OAuth.Configuration
                     ClientId = "socialnetwork",
                     ClientSecrets = new [] { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = new []{"socialnetwork"}
-                }
+                    AllowedScopes = new []{"socialnetwork" },
+                    Claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.Role,"SocialNetwork.Api")
+                    }
+                },
+                new Client()
+                {
+                    ClientId = "coffeshop",
+                    ClientSecrets = new [] { new Secret("coffe123$".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    AllowedScopes = new [] {"coffeshop"}
+                }, 
 
             };
         }
@@ -43,7 +60,12 @@ namespace SocialNetwork.OAuth.Configuration
                 {
                     SubjectId = "1",
                     Username = "dortiz",
-                    Password = "pass123"
+                    Password = "pass123",
+                    Claims = new List<Claim>()
+                    {
+                        new Claim("cuenta", "12346"),
+                        new Claim(ClaimTypes.Role, "SR.Domiciolio.Web.Controllers.Login")
+                    }
                 },
             };
         }

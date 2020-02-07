@@ -22,6 +22,7 @@ namespace SocialNetwork.OAuth
                 .AddSigningCredential(new X509Certificate2(@"C:\Users\Douglas\Documents\MisRepos\SocialNetwork\SocialNetwork.OAuth\socialnetwork.pfx","pass123"))
                 .AddTestUsers(InMemoryConfiguration.Users().ToList())
                 .AddInMemoryClients(InMemoryConfiguration.Clients())
+                .AddInMemoryIdentityResources(InMemoryConfiguration.IdentityResources())
                 .AddInMemoryApiResources(InMemoryConfiguration.ApiResources());
 
             services.AddMvc();

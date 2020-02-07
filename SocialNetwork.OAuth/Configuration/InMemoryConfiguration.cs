@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 
@@ -20,9 +21,19 @@ namespace SocialNetwork.OAuth.Configuration
                 new ApiResource("socialnetwork", "Social Network", new List<string>()
                 {
                     ClaimTypes.Role,
-                    "cuenta"
+                    "cuenta",
+                    ClaimTypes.Surname
                 }),
                 new ApiResource("coffeshop", "The Great Coffe Shop")
+            };
+        }
+
+        public static IEnumerable<IdentityResource> IdentityResources()
+        {
+            return new IdentityResource[]
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile()
             };
         }
 
@@ -38,7 +49,8 @@ namespace SocialNetwork.OAuth.Configuration
                     AllowedScopes = new []{"socialnetwork" },
                     Claims = new List<Claim>()
                     {
-                        new Claim(ClaimTypes.Role,"SocialNetwork.Api")
+                        new Claim(ClaimTypes.Role,"SocialNetwork.Api"),
+                        new Claim(ClaimTypes.Surname, "SocialNetworks")
                     }
                 },
                 new Client()
@@ -47,6 +59,20 @@ namespace SocialNetwork.OAuth.Configuration
                     ClientSecrets = new [] { new Secret("coffe123$".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                     AllowedScopes = new [] {"coffeshop"}
+                },
+                new Client()
+                {
+                    ClientId = "socialnetwork_implicit",
+                    ClientSecrets = new []{new Secret("secret".Sha256()), },
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedScopes = new []
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "socialnetwork",
+                    },
+                    RedirectUris = new [] { "http://localhost:63686/signin-oidc" },
+                    PostLogoutRedirectUris = new [] { "http://localhost:63686/signout-callback-oidc" }
                 }, 
 
             };
@@ -64,7 +90,8 @@ namespace SocialNetwork.OAuth.Configuration
                     Claims = new List<Claim>()
                     {
                         new Claim("cuenta", "12346"),
-                        new Claim(ClaimTypes.Role, "SR.Domiciolio.Web.Controllers.Login")
+                        new Claim(ClaimTypes.Role, "SR.Domiciolio.Web.Controllers.Login"),
+                        new Claim(ClaimTypes.Role, "SR.Domiciolio.Web.Controllers.Inicio")
                     }
                 },
             };
